@@ -1,22 +1,26 @@
-const db = require("../../utils/db");
-
+const Joi = require("joi");
 module.exports = {
-    'register': async(req, res, next) => {
+    'registerValidator': async (req, res, next) => {
         try {
-            const { userType, username, password } = req.body;
-            if (!userType || !username || !password) {
-                return { message: 'Validation Error on required fields userType username password' }
+            const schema = Joi.object({
+                firstName: Joi.string().required().min(3),
+                lastName: Joi.string().required(),
+                password: Joi.string().required(),
+                email: Joi.string().email().required(),
+                phone: Joi.number(),
+                username: Joi.string().required(),
+            });
+            const { error } = await schema.validateAsync(req.body);
+            if (error) {
+                return {
+                    status: false,
+                    message: error.message
+                }
             }
-            if (!['FARMER', 'ADMIN'].includes(userType)) {
-                return { message: 'Validation Error on UserType' }
-            }
-            const userId = Math.ceil(Math.random * 1000000);
-            const isInserted = await db('user', { userId, ...req.body });
-            return {
-                status: isInserted
-            }
+            next();
         } catch (error) {
-
+            console.log(error);
+            next(error);
         }
     }
 }

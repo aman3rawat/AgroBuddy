@@ -1,8 +1,9 @@
 const app = require('express')();
-const router = require('./routes');
+const globalErrorHandler = require('./middleware/globalErrorHandler');
+const routes = require('./routes');
 
 app.use(require('express').json());
-app.use('/', (req, res) => {
+app.use('/api/health', (req, res) => {
     try {
         return res.status(200).json({
             statusCode: 200,
@@ -18,13 +19,13 @@ app.use('/', (req, res) => {
     }
 });
 
-app.use('/api/v1', router);
-
+app.use('/api/v1', routes);
+app.use(globalErrorHandler);
 app.use('/', (req, res) => {
     try {
         return res.status(404).json({
             statusCode: 404,
-            message: `${req.route} route does not exist`
+            message: `${req.url} route does not exist`
         })
     } catch (error) {
         healthcheck.message = error;
