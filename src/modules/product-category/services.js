@@ -1,20 +1,17 @@
-const cropManagement = require("../../models/crop-management");
-
+const Product_categories = require("../../models/product_categories");
+const attributes = { exclude: ['created_date', 'updated_date'] }
 module.exports = {
     'list': async (req, res, next) => {
         try {
             let data = [];
             if (req.query.id) {
-                data = await cropManagement.findByPk(req.query.id);
+                data = await Product_categories.findByPk(req.query.id);
             } else {
-                data = await cropManagement.findAll({
-                    raw: true,
-                    attributes: { exclude: ['created_date', 'updated_date'] }
-                });
+                data = await Product_categories.findAll({ raw: true, attributes });
             }
             return {
                 status: true,
-                data: data
+                data
             };
         } catch (error) {
             console.log('Error:', error);
@@ -23,10 +20,10 @@ module.exports = {
     },
     'create': async (req, res, next) => {
         try {
-            const data = await cropManagement.create(req.body);
+            const data = await Product_categories.create(req.body);
             return {
                 status: true,
-                data: data
+                data
             };
         } catch (error) {
             console.log('Error:', error);
@@ -35,23 +32,15 @@ module.exports = {
     },
     'update': async (req, res, next) => {
         try {
-            const data = await cropManagement.findByPk(req.params.id);
+            const data = await Product_categories.findByPk(req.params.id);
             if (!data) {
-                return res.status(404).send({ message: 'Crop Data not found!' });
+                return res.status(404).send({ message: 'Product category not found!' });
             }
             const updateingData = {
                 name: req.body?.name || data.name,
-                intro: req.body?.intro || data.intro,
-                season_type: req.body?.season_type || data.season_type,
-                soil_type: req.body?.soil_type || data.soil_type,
-                type: req.body?.type || data.type,
-                propogation_time: req.body?.propogation_time || data.propogation_time,
-                description: req.body?.description || data.description,
-                image: req.body?.image || data.image,
-                video: req.body?.video || data.video,
-                inter_cropping_type: req.body?.inter_cropping_type || data.inter_cropping_type,
+                descriptions: req.body?.descriptions || data.descriptions,
             }
-            const updatedData = await cropManagement.update(updateingData, {
+            const updatedData = await Product_categories.update(updateingData, {
                 where: { id: req.params.id }
             });
             return {
@@ -65,12 +54,16 @@ module.exports = {
     },
     'del': async (req, res, next) => {
         try {
-            const data = await cropManagement.destroy({
+            const data = await Product_categories.findByPk(req.params.id);
+            if (!data) {
+                return res.status(404).send({ message: 'Product category not found!' });
+            }
+            await Product_categories.destroy({
                 where: { id: req.params.id }
             });
             return {
                 status: true,
-                data: data
+                message: 'Product category deleted successfully'
             };
         } catch (error) {
             console.log('Error:', error);

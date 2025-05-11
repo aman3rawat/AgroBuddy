@@ -2,12 +2,12 @@ const { DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('.');
 
-module.exports = sequelize.define('User', {
+module.exports = sequelize.define('Admin', {
     id: {
         type: DataTypes.INTEGER,
         unique: true,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
     },
     first_name: {
         type: DataTypes.STRING(50),
@@ -22,15 +22,6 @@ module.exports = sequelize.define('User', {
         allowNull: true,
         unique: true
     },
-    mobile_no: {
-        type: DataTypes.STRING(50),
-        allowNull: true,
-        unique: true
-    },
-    profile_picture: {
-        type: DataTypes.STRING(100),
-        allowNull: true
-    },
     username: {
         type: DataTypes.STRING(30),
         allowNull: true,
@@ -38,10 +29,6 @@ module.exports = sequelize.define('User', {
     },
     password: {
         type: DataTypes.STRING(100),
-        allowNull: true
-    },
-    otpa: {
-        type: DataTypes.STRING(4),
         allowNull: true
     },
     created_date: {
@@ -53,7 +40,7 @@ module.exports = sequelize.define('User', {
         allowNull: true
     }
 }, {
-    tableName: 'user',
+    tableName: 'admin',
     timestamps: false, // if you're not using Sequelize's createdAt/updatedAt
     hooks: {
         beforeCreate: async (user) => {

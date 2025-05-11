@@ -1,7 +1,8 @@
 const express = require('express');
-const { create } = require('./services');
+const { login } = require('./controllers');
+const { loginValidator } = require('./validators');
 const productRoutes = express.Router();
 
-productRoutes.post('/login', create);
+productRoutes.post('/login', loginValidator, login);
 
 module.exports = productRoutes;

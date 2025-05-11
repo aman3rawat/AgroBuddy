@@ -1,12 +1,21 @@
-const { Op, JSON } = require("sequelize");
+const { Op } = require("sequelize");
 const User = require("../../models/user");
-const catchAsync = require("../../utils/catchAsync");
 const bcrypt = require('bcrypt');
-const customResponse = require("../../utils/customResponse");
+const jwt = require('jsonwebtoken');
 
 module.exports = {
-    'login': (req, res, next) => {
-
+    'list': async (req, res, next) => {
+        try {
+            console.log('user list service');
+            const users = await User.findAll({
+                attributes: ['id', 'first_name', 'last_name', 'email', 'mobile_no', 'username'],
+                raw: true
+            });
+            return { status: true, data: users };
+        }
+        catch (error) {
+            return next(error);
+        }
     },
     'register': async (req, res, next) => {
         try {
@@ -18,7 +27,7 @@ module.exports = {
                 },
                 raw: true
             });
-            if (isUserExist?._id) {
+            if (isUserExist?.email) {
                 const duplicateKey = isUserExist.email == email ? 'email' : (isUserExist.mobile_no == phone ? 'mobile' : 'username');
                 return {
                     status: false,

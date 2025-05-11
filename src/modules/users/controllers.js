@@ -1,24 +1,40 @@
-const ApiError = require("../../utils/apiError");
-const catchAsync = require("../../utils/catchAsync");
-const customResponse = require("../../utils/customResponse");
-const { register } = require("./services");
-
-console.log('user controller');
+const { register, list } = require("./services");
 
 module.exports = {
-    'login': (req, res, next) => {
-
+    'list': async (req, res, next) => {
+        try {
+            const data = await list(req, res, next);
+            if (data.status) {
+                return res.status(200).send({
+                    status: true,
+                    statusCode: 200,
+                    message: 'User Data retrieved successfully',
+                    data: data.data
+                });
+            } else {
+                return res.status(404).send({ message: 'Users not found!' });
+            }
+        } catch (error) {
+            console.log('Error:', error);
+            return res.status(500).send({ message: 'Internal Server Error' });
+        }
     },
     'register': async (req, res, next) => {
         try {
             const data = await register(req, res, next);
             if (data.status) {
-                return customResponse(res, data);
+                return res.status(200).send({
+                    status: true,
+                    statusCode: 200,
+                    message: 'User Registered successfully',
+                    data: data.data
+                });
             } else {
-                return next(new ApiError(data.statusCode, data.message));
+                return res.status(404).send({ message: 'User not found!' });
             }
         } catch (error) {
-            return next(error);
+            console.log('Error:', error);
+            return res.status(500).send({ message: 'Internal Server Error' });
         }
     }
 }

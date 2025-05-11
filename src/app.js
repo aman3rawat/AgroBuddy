@@ -1,5 +1,4 @@
 const app = require('express')();
-const globalErrorHandler = require('./middleware/globalErrorHandler');
 const routes = require('./routes');
 
 app.use(require('express').json());
@@ -20,7 +19,7 @@ app.use('/api/health', (req, res) => {
 });
 
 app.use('/api/v1', routes);
-app.use(globalErrorHandler);
+// app.use(globalErrorHandler);
 app.use('/', (req, res) => {
     try {
         return res.status(404).json({

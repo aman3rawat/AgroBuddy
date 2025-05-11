@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const productRoutes = require("../modules/products/routes");
-const userRoutes = require('../modules/users/routes');
-const orderRoutes = require('../modules/orders/routes');
 
-router.use('/product', productRoutes);
-router.use('/user', userRoutes);
-router.use('/order', orderRoutes);
+router.use('/auth', require('../modules/auth/routes'));
+router.use('/product', require("../modules/products/routes"));
+router.use('/category', require('../modules/product-category/routes'));
+router.use('/user', require('../modules/users/routes'));
+router.use('/order', require('../modules/orders/routes'));
+router.use('/cropManagement', require('../modules/crops/routes'))
 
 module.exports = router;

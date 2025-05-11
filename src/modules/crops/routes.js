@@ -1,7 +1,10 @@
 const express = require('express');
-const { create } = require('./services');
-const productRoutes = express.Router();
+const { list, create, del } = require('./controllers');
+const cropManagementRoutes = express.Router();
 
-productRoutes.post('/login', create);
+cropManagementRoutes.get('/', list);
+cropManagementRoutes.post('/', create);
+cropManagementRoutes.delete('/:id', del);
+cropManagementRoutes.put('/:id', create);
 
-module.exports = productRoutes;
+module.exports = cropManagementRoutes;

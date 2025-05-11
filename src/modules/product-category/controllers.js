@@ -1,4 +1,4 @@
-const { list, update, create, del } = require("./services");
+const { list, create, update, del } = require("./services");
 
 module.exports = {
     'list': async (req, res, next) => {
@@ -8,12 +8,12 @@ module.exports = {
                 return res.status(200).send({
                     status: true,
                     statusCode: 200,
-                    message: 'Crop Data retrieved successfully',
+                    message: 'Product categories retrieved successfully',
                     data: data.data
                 });
             } else {
-                console.log('Error:', error);
-                return res.status(404).send({ message: 'Crop Data not found!' });
+                console.log('Error:', data);
+                return res.status(404).send({ message: 'Category not found!' });
             }
         } catch (error) {
             console.log('Error:', error);
@@ -27,12 +27,12 @@ module.exports = {
                 return res.status(200).send({
                     status: true,
                     statusCode: 200,
-                    message: 'Crop Data created successfully',
+                    message: 'Product categories retrieved successfully',
                     data: data.data
                 });
             } else {
-                console.log('Error:', error);
-                return res.status(404).send({ message: 'Crop Data not found!' });
+                console.log('Error:', data);
+                return res.status(404).send({ message: 'Category not found!' });
             }
         } catch (error) {
             console.log('Error:', error);
@@ -46,12 +46,12 @@ module.exports = {
                 return res.status(200).send({
                     status: true,
                     statusCode: 200,
-                    message: 'Crop Data updated successfully',
+                    message: 'Product categories retrieved successfully',
                     data: data.data
                 });
             } else {
-                console.log('Error:', error);
-                return res.status(404).send({ message: 'Crop Data not found!' });
+                console.log('Error:', data);
+                return res.status(404).send({ message: 'Category not found!' });
             }
         } catch (error) {
             console.log('Error:', error);
@@ -65,12 +65,12 @@ module.exports = {
                 return res.status(200).send({
                     status: true,
                     statusCode: 200,
-                    message: 'Crop Data deleted successfully',
+                    message: 'Product categories retrieved successfully',
                     data: data.data
                 });
             } else {
-                console.log('Error:', error);
-                return res.status(404).send({ message: 'Crop Data not found!' });
+                console.log('Error:', data);
+                return res.status(404).send({ message: 'Category not found!' });
             }
         } catch (error) {
             console.log('Error:', error);
