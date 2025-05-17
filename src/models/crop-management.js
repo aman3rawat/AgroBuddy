@@ -25,11 +25,6 @@ module.exports =  sequelize.define('CropManagement', {
     type: DataTypes.STRING(50),
     allowNull: false,
   },
-  type: {
-    type: DataTypes.ENUM('OFFLINE', 'ONLINE'),
-    allowNull: true,
-    defaultValue: 'OFFLINE',
-  },
   propogation_time: {
     type: DataTypes.STRING(10),
     allowNull: true,
@@ -39,11 +34,11 @@ module.exports =  sequelize.define('CropManagement', {
     allowNull: false,
   },
   image: {
-    type: DataTypes.STRING(20),
+    type: DataTypes.TEXT('long'),
     allowNull: true,
   },
   video: {
-    type: DataTypes.STRING(20),
+    type: DataTypes.TEXT('long'),
     allowNull: true,
   },
   inter_cropping_type: {

@@ -9,14 +9,6 @@ module.exports = sequelize.define('Feedback', {
     primaryKey: true,
     unique: true,
   },
-  user_id: {
-    type: DataTypes.STRING(15),
-    allowNull: false,
-    references: {
-      model: User, // Reference the User model
-      key: '_id',
-    },
-  },
   fullName: {
     type: DataTypes.STRING(100),
     allowNull: true,

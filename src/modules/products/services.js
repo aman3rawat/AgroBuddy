@@ -62,6 +62,7 @@ module.exports = {
                 description: req.body?.description || data.description,
                 image: req.body?.image || data.image,
                 video: req.body?.video || data.video,
+                unit: req.body?.unit || data.unit
             }
             const updatedData = await Product.update(updateingData, {
                 where: { id: req.params.id }

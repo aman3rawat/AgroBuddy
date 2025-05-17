@@ -1,12 +1,11 @@
 const express = require('express');
-const { createValidator } = require('./validators');
-const { list, create, del } = require('./controllers');
-const { update } = require('./services');
+const { createValidator, updateValidator } = require('./validators');
+const { list, create, del, update } = require('./controllers');
 const productRoutes = express.Router();
 
 productRoutes.get('/', list);
 productRoutes.post('/', createValidator, create);
-productRoutes.put('/:id', createValidator, update);
+productRoutes.put('/:id', updateValidator, update);
 productRoutes.delete('/:id', del);
 
 module.exports = productRoutes;

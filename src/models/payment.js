@@ -31,6 +31,11 @@ module.exports = sequelize.define('Payment', {
     allowNull: true,
     defaultValue: 'PENDING',
   },
+  rating: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    defaultValue: 0,
+  },
   order_id: {
     type: DataTypes.INTEGER,
     allowNull: false,

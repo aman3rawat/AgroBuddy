@@ -17,7 +17,6 @@ app.use('/api/health', (req, res) => {
         res.status(503).send();
     }
 });
-
 app.use('/api/v1', routes);
 // app.use(globalErrorHandler);
 app.use('/', (req, res) => {

@@ -63,6 +63,9 @@ module.exports = {
                 quantity: Joi.string().max(10).optional().allow('').messages({
                     'string.max': 'Quantity must not exceed 10 characters',
                 }),
+                unit: Joi.string().optional().allow('').messages({
+                    'string.max': 'Quantity must not exceed 10 characters',
+                }),
             });
             const { error } = await schema.validateAsync(req.body);
             if (error) {

@@ -1,6 +1,6 @@
 const ApiError = require("../../utils/apiError");
 const customResponse = require("../../utils/customResponse");
-const { create, list } = require("./services");
+const { create, list, update } = require("./services");
 
 module.exports = {
     'create': async (req, res, next) => {

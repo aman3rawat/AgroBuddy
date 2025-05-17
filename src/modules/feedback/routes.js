@@ -1,7 +1,10 @@
 const express = require('express');
-const { create } = require('./services');
-const productRoutes = express.Router();
+const { create, list, del } = require('./controllers');
+const { createValidator } = require('./validators');
+const feedbackRoutes = express.Router();
 
-productRoutes.post('/login', create);
+feedbackRoutes.post('/', createValidator, create); // Create feedback
+feedbackRoutes.get('/', list); // List all feedbacks
+feedbackRoutes.delete('/:id', del); // Delete feedback by ID
 
-module.exports = productRoutes;
+module.exports = feedbackRoutes;

@@ -39,6 +39,10 @@ const Product = sequelize.define('Product', {
     type: DataTypes.STRING(10),
     allowNull: true,
   },
+  unit: {
+    type: DataTypes.STRING(10),
+    allowNull: false,
+  },
 }, {
   tableName: 'product',
   timestamps: false, // Disable Sequelize's automatic timestamps
