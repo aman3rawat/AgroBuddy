@@ -1,7 +1,7 @@
 const app = require('express')();
 const routes = require('./routes');
-
 app.use(require('express').json());
+app.set('view engine', 'ejs');
 app.use('/api/health', (req, res) => {
     try {
         return res.status(200).json({
@@ -21,12 +21,12 @@ app.use('/api/v1', routes);
 // app.use(globalErrorHandler);
 app.use('/', (req, res) => {
     try {
-        return res.status(404).json({
-            statusCode: 404,
-            message: `${req.url} route does not exist`
-        })
+        return res.render('index', {
+            title: 'Welcome to the API',
+            message: 'This is the home page of the API. Use the /api/v1 endpoint to access the API.'
+        });
     } catch (error) {
-        healthcheck.message = error;
+        console.log('Error in rendering home page:', error);
         res.status(503).send();
     }
 })
